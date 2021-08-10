@@ -1,0 +1,49 @@
+name: analyzer
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Temp input for workflow to run adhoc'
+        required: false
+        default: 'Ignore this field'
+
+  push:
+    paths-ignore:
+      - '**.md'
+      - '**.py'
+      - '**.js'
+      - '.github/**'
+
+
+jobs:
+  auto-doc:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+
+      - name: setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          
+      - name: install node modules
+        run: npm install node-fetch
+          
+      - name: execute node script # run sj-gobierno.py to get the latest data
+        run: node .github/analyzer_run.js $GITHUB_WORKSPACE
+          
+      # - name: commit files
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git add README.md
+      #     git commit -m "Regenerating README after last commit"
+          
+      # - name: push changes
+      #   uses: ad-m/github-push-action@v0.6.0
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: main  
