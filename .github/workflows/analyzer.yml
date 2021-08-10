@@ -34,6 +34,10 @@ jobs:
           
       - name: execute node script # run sj-gobierno.py to get the latest data
         run: node .github/analyzer_run.js $GITHUB_WORKSPACE
+        id: analyzer-script
+
+      - name: print outputs
+        run: echo "The output is ${{ steps.analyzer-script.outputs.OUTPUT_JSON }}"
           
       # - name: commit files
       #   run: |
