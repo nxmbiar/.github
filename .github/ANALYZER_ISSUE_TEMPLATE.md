@@ -4,4 +4,6 @@ assignees: nxmbiar
 labels: bug
 ---
 
-This is a test issue
+This is also a test issue
+
+{{ env.JSON }}
