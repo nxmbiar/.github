@@ -13,6 +13,9 @@ fetch('https://raw.githubusercontent.com/CiscoSecurity/sxo-05-security-workflows
         // console.log(file);
         file = path.join(repo,file)
         if(fs.statSync(file).isDirectory()){
+            if(file.includes('.git') || file.includes('node_modules')){
+                return
+            }
             fs.readdirSync(file).forEach(innerFile => {
                 innerFile = path.join(file,innerFile)
                 console.log(innerFile);
@@ -30,7 +33,7 @@ fetch('https://raw.githubusercontent.com/CiscoSecurity/sxo-05-security-workflows
                 }
               });
         }
-        else if(fs.statSync(file).isFile()){
+        else if(fs.statSync(file).isFile() && !file.includes('package-lock')){
             var wf = fs.readFileSync(file, 'utf-8')
         
             let analyzed = analyzeWorkflow(wf)
