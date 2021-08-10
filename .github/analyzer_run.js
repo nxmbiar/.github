@@ -52,6 +52,6 @@ fetch('https://raw.githubusercontent.com/CiscoSecurity/sxo-05-security-workflows
         }
       });
 
-      console.log(`::set-output name=OUTPUT_JSON::${output_json}`)
+      console.log(`::set-output name=OUTPUT_JSON::${JSON.stringify(output_json)}`)
   })
   .catch(err => console.error(err))
