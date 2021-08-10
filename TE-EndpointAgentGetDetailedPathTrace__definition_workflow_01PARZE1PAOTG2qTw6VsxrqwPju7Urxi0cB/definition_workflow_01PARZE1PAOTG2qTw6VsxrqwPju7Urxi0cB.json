@@ -1,0 +1,290 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB",
+    "name": "TE - Endpoint Agent Get Detailed Path Trace",
+    "title": "TE - Endpoint Agent Get Detailed Path Trace",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PARZE1HSWR36MnoLdaTWv59ylODMmolZ3",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Path Id",
+          "type": "datatype.string",
+          "description": "Id of the path for which hop details are required",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PARZE1HSZ9P2YszFbuNJHM2JiYuhuWFKx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Filter Criteria",
+          "type": "datatype.string",
+          "description": "Filter by field values, for example: responseTime \u003e 4 will return only rows where response time is greater than 4ms. Logical AND/OR operators are also supported. By default or if you leave this field blank, all rows are returned.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PARZE1HSY2D1EneM1xuHcJMvrMlb4Q0NG",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Agent Id",
+          "type": "datatype.string",
+          "description": "Id of the Agent associated with the test",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PARZE1HT0JE0iuszOKjwsEIjU2KnvYjRL",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Round Id",
+          "type": "datatype.string",
+          "description": "Id of the round for the trace",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PARZE1HSVDU2qpJNi6zbUO7khpZN2htHj",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "'hop','ipAddress','prefix','rdns','network','responseTime','location','mpls'",
+          "scope": "input",
+          "name": "Fields To Return",
+          "type": "datatype.string",
+          "description": "Single quoted, comma-separated list of fields to return. By default, the following are available \u0026 supported, i.e. you may choose to output one or more of these: \n\n'testId', 'testName', 'createdDate', 'modifiedDate', 'createdBy', 'modifiedBy', 'enabled', 'savedEvent', 'type', 'interval', 'server', 'protocol', 'ipv6policy', 'networkMeasurements', 'mtuMeasurements', 'bandwidthMeasurements', 'bgpMeasurements', 'usePublicBgp', 'dscpId', 'alertsEnabled', 'liveShare', 'pingPayloadSize', 'probeMode', 'pathTraceMode', 'numPathTraces', 'dscp'",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PARZE1HSRF42GcIZnMPjKTkgMcDbECemJ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Test Id",
+          "type": "datatype.string",
+          "description": "Test Id for the required path trace",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PARZE1HT1SQ4wxPYPmLfmz1jSAkzkJgyE",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "ThousandEyes",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "Returns a hop-by-hop summary of the path trace data collected during path visualization. In each round, one path discovery attempt is made to reach the destination. The entire path is returned. A roundId must be specified.\nDocumentation: https://developer.thousandeyes.com/v6/endpoint_test_data/#/endpoint_traceroute\n\nSteps to use:\n1. Setup your ThousandEyes API Target \u0026 Account Key\n2. Provide an Endpoint Agent ID, Path ID, Round ID, Test ID, filter criteria/condition \u0026 what fields you'd like to have returned (by default, all fields/values are returned)\n3. If the request is successful, the output of this atomic is a JSON string w/ rows that match the filter criteria\n4. If the request is not successful, the output contains the error message",
+      "display_name": "TE - Endpoint Agent Get Detailed Path Trace",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01PARZECDCRYQ6nCuWmxO0GxW8iAbOtHUp5",
+        "name": "Swagger HTTP Request",
+        "title": "Get Detailed Path Trace",
+        "type": "web-service.swagger_http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": true,
+          "display_name": "Get Detailed Path Trace",
+          "error": "null",
+          "method": "GET",
+          "relative_url": "endpoint-data/tests/net/path-vis/$workflow.definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB.input.variable_workflow_01PARZE1HT1SQ4wxPYPmLfmz1jSAkzkJgyE$/$workflow.definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB.input.variable_workflow_01PARZE1HT0JE0iuszOKjwsEIjU2KnvYjRL$/$workflow.definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB.input.variable_workflow_01PARZE1HSVDU2qpJNi6zbUO7khpZN2htHj$.json",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "swagger_url": "https://raw.githubusercontent.com/ciscomanagedservices/sxo-thousandeyes/main/Cisco%20ThousandEyes%20API%20v6.json?token=AB3MRM75BNVET2HXMEAX3T3AY3UKE",
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01PARZEGQKCP76oh4y8zxiyP7C1UH24vR6j",
+        "name": "Condition Block",
+        "title": "Check if Successful",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Check if Successful",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01PARZEL68K1R4NkZEmEBuAV3uSpWBPZM3r",
+            "name": "Condition Branch",
+            "title": "Succeeded",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01PARZECDCRYQ6nCuWmxO0GxW8iAbOtHUp5.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Succeeded",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01PARZENJ2SOP57nEkW9oqG9VF95WFDciQs",
+                "name": "Read Table from JSON",
+                "title": "Parse JSON into Table",
+                "type": "corejava.read_table_from_json",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Parse JSON into Table",
+                  "input_json": "$activity.definition_activity_01PARZECDCRYQ6nCuWmxO0GxW8iAbOtHUp5.output.response_body$",
+                  "jsonpath_query": "$.endpointNet.pathVis[0].routes[?(@.pathId == '$workflow.definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB.input.variable_workflow_01PARZE1HSZ9P2YszFbuNJHM2JiYuhuWFKx$')].hops[*][$workflow.definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB.input.variable_workflow_01PARZE1HSRF42GcIZnMPjKTkgMcDbECemJ$]",
+                  "persist_output": true,
+                  "populate_columns": true,
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01PARZESNVAK16KqrVEgb8CIakT6lMft04U",
+                "name": "Select from Table",
+                "title": "Filter Table",
+                "type": "core.selectfromtable",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Filter Table",
+                  "input_table": "$activity.definition_activity_01PARZENJ2SOP57nEkW9oqG9VF95WFDciQs.output.read_table_from_json$",
+                  "number_of_rows": {
+                    "all_rows": true
+                  },
+                  "persist_output": true,
+                  "skip_execution": false,
+                  "sorting": {
+                    "no_sort": true
+                  },
+                  "where_clause": "$workflow.definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB.input.variable_workflow_01PARZE1HSY2D1EneM1xuHcJMvrMlb4Q0NG$"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01PARZEXKA7QY6ESmhdJ8MN6hXhByOdaBnB",
+                "name": "Set Variables",
+                "title": "Return Filtered JSON Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Return Filtered JSON Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB.output.variable_workflow_01PARZE1HSWR36MnoLdaTWv59ylODMmolZ3$",
+                      "variable_value_new": "$activity.definition_activity_01PARZESNVAK16KqrVEgb8CIakT6lMft04U.output.response_body$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01PARZF2DHKGZ0ZVjzeRdaaOgCi3G3glQ9W",
+            "name": "Condition Branch",
+            "title": "Not Succeeded",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01PARZECDCRYQ6nCuWmxO0GxW8iAbOtHUp5.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Not Succeeded",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01PARZF4KMMQN6MXdugguqKsaD9WXCSnUcQ",
+                "name": "Set Variables",
+                "title": "Set Error Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Error Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB.output.variable_workflow_01PARZE1HSWR36MnoLdaTWv59ylODMmolZ3$",
+                      "variable_value_new": "$activity.definition_activity_01PARZECDCRYQ6nCuWmxO0GxW8iAbOtHUp5.output.error.message$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}

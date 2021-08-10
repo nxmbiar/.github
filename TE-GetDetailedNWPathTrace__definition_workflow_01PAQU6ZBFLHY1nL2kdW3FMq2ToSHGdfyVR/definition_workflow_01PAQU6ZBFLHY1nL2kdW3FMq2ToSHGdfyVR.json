@@ -1,0 +1,437 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR",
+    "name": "TE - Get Detailed Network Path Trace",
+    "title": "TE - Get Detailed Network Path Trace",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "'hop','ipAddress','prefix','rdns','network','responseTime','location','mpls'",
+          "scope": "input",
+          "name": "Fields To Return",
+          "type": "datatype.string",
+          "description": "Single quoted, comma-separated list of fields to return. By default, the following are available \u0026 supported, i.e. you may choose to output one or more of these: \n\n'testId', 'testName', 'createdDate', 'modifiedDate', 'createdBy', 'modifiedBy', 'enabled', 'savedEvent', 'type', 'interval', 'server', 'protocol', 'ipv6policy', 'networkMeasurements', 'mtuMeasurements', 'bandwidthMeasurements', 'bgpMeasurements', 'usePublicBgp', 'dscpId', 'alertsEnabled', 'liveShare', 'pingPayloadSize', 'probeMode', 'pathTraceMode', 'numPathTraces', 'dscp'",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PAQU6Z3TOVP5yptsPnG1NBVMaupjqZqnm",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Path Id",
+          "type": "datatype.string",
+          "description": "Id of the path for which hop details are required",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PAQYIZJI7B65UQ9662VmALOPdI37TtqBy",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Agent Id",
+          "type": "datatype.string",
+          "description": "Id of the Agent associated with the test",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PAQXSTDEFYI4OpeSPBxB8OY747ZbCNrkZ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Test Id",
+          "type": "datatype.string",
+          "description": "Test Id for the required path trace",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PAQXHYJYU590HbzNKkRSoEiygdBhtX15M",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Filter Criteria",
+          "type": "datatype.string",
+          "description": "Filter by field values, for example: type == \"agent-to-server\" will return only agent-to-server tests. Logical AND/OR operators are also supported. By default or if you leave this field blank, all rows are returned.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PAQU6Z3TJ8501yjFJAOuqAAb0qoKnS1Ro",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01PCICRHIEYRK5pJ1aW71AbYt6pBm8Hlz7E",
+        "properties": {
+          "scope": "output",
+          "name": "Output Table",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PCID9UUD7093yxCV54dqr5Tq6WbL3X0th",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Round Id",
+          "type": "datatype.string",
+          "description": "Id of the round for the trace",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PAQY5D6NX4A5wenYuqRBoSCvrpWufieE0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PAQU6Z3TNKD4FI9G70CPzW0sAuFKmMVls",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "ThousandEyes",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "Returns a hop-by-hop summary of the path trace data collected during path visualization. In each path visualization attempt, three attempts are made to reach the destination, and the entire path will be shown in sequence. A roundId must be specified. \nDocumentation: https://developer.thousandeyes.com/v6/test_data/#/traceroute\n\nSteps to use:\n1. Setup your ThousandEyes API Target \u0026 Account Key\n2. Provide a Test ID, Agent ID, Round ID, Path ID \u0026 what fields you'd like to have returned (if no filter criteria is specified, by default all fields/values are returned)\n3. If the request is successful, two output variables are made available: (a) a table object (b) a JSON string w/ the detailed path trace\n4. If the request is not successful, the output contains the error message",
+      "display_name": "TE - Get Detailed Network Path Trace",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01PAQU796RAP630u4quzUfmkLzQmUH9k83J",
+        "name": "Swagger HTTP Request",
+        "title": "Get Detailed Path Trace",
+        "type": "web-service.swagger_http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": true,
+          "display_name": "Get Detailed Path Trace",
+          "error": "null",
+          "method": "GET",
+          "relative_url": "net/path-vis/$workflow.definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR.input.variable_workflow_01PAQXHYJYU590HbzNKkRSoEiygdBhtX15M$/$workflow.definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR.input.variable_workflow_01PAQXSTDEFYI4OpeSPBxB8OY747ZbCNrkZ$/$workflow.definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR.input.variable_workflow_01PAQY5D6NX4A5wenYuqRBoSCvrpWufieE0$.json",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "swagger_url": "https://raw.githubusercontent.com/ciscomanagedservices/sxo-thousandeyes/main/Cisco%20ThousandEyes%20API%20v6.json?token=AB3MRM75BNVET2HXMEAX3T3AY3UKE",
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01PAQU7DFBN5463V0jFNxbMf5TwHd8gRKkJ",
+        "name": "Condition Block",
+        "title": "Check if Successful",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Check if Successful",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01PAQU7HP9JKX0oZmXjt7ScE5Zgl5Au0ZHs",
+            "name": "Condition Branch",
+            "title": "Succeeded",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01PAQU796RAP630u4quzUfmkLzQmUH9k83J.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Succeeded",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01PAQU7JZ2DMZ7BPFcDGkdaZPEqDvTeHIJC",
+                "name": "Read Table from JSON",
+                "title": "Parse JSON into Table",
+                "type": "corejava.read_table_from_json",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Parse JSON into Table",
+                  "input_json": "$activity.definition_activity_01PAQU796RAP630u4quzUfmkLzQmUH9k83J.output.response_body$",
+                  "jsonpath_query": "$.net.pathVis[0].routes[?(@.pathId == '$workflow.definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR.input.variable_workflow_01PAQYIZJI7B65UQ9662VmALOPdI37TtqBy$')].hops[*][$workflow.definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR.input.variable_workflow_01PAQU6Z3TOVP5yptsPnG1NBVMaupjqZqnm$]",
+                  "persist_output": true,
+                  "populate_columns": false,
+                  "skip_execution": false,
+                  "table_columns": [
+                    {
+                      "column_name": "hop",
+                      "column_type": "integer"
+                    },
+                    {
+                      "column_name": "ipAddress",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "prefix",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "rdns",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "network",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "responseTime",
+                      "column_type": "integer"
+                    },
+                    {
+                      "column_name": "location",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "mpls",
+                      "column_type": "string"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe",
+                "name": "For Each",
+                "title": "For Each",
+                "type": "logic.for_each",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "For Each",
+                  "skip_execution": false,
+                  "source_array": "$activity.definition_activity_01PAQU7JZ2DMZ7BPFcDGkdaZPEqDvTeHIJC.output.read_table_from_json$"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01PCIDI2LAHAR4PyrcHhH8evl002h7EhtsM",
+                    "name": "Add Row to Table",
+                    "title": "Add Row to Table",
+                    "type": "core.addrowtotable",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Add Row to Table",
+                      "input_table": "$workflow.definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR.output.variable_workflow_01PCID9UUD7093yxCV54dqr5Tq6WbL3X0th$",
+                      "row": [
+                        {
+                          "key": "hop",
+                          "type": "integer",
+                          "value": "$activity.definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe.input.source_array[@].hop$"
+                        },
+                        {
+                          "key": "ipAddress",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe.input.source_array[@].ipAddress$"
+                        },
+                        {
+                          "key": "prefix",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe.input.source_array[@].prefix$"
+                        },
+                        {
+                          "key": "rdns",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe.input.source_array[@].rdns$"
+                        },
+                        {
+                          "key": "network",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe.input.source_array[@].network$"
+                        },
+                        {
+                          "key": "responseTime",
+                          "type": "integer",
+                          "value": "$activity.definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe.input.source_array[@].responseTime$"
+                        },
+                        {
+                          "key": "location",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe.input.source_array[@].location$"
+                        },
+                        {
+                          "key": "mpls",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCIDCS16F762mSApTtiQXV7REV9ZgQyEe.input.source_array[@].mpls$"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01PAQU7TXPO841s28UZhzmnBGWq9T5FU6MS",
+                "name": "Set Variables",
+                "title": "Return JSON Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Return JSON Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR.output.variable_workflow_01PAQU6Z3TNKD4FI9G70CPzW0sAuFKmMVls$",
+                      "variable_value_new": "$activity.definition_activity_01PAQU7JZ2DMZ7BPFcDGkdaZPEqDvTeHIJC.output.response_body$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01PAQU7YUM6MA78PwnrTDju0gW09SxFq6CE",
+            "name": "Condition Branch",
+            "title": "Not Succeeded",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01PAQU796RAP630u4quzUfmkLzQmUH9k83J.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Not Succeeded",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01PAQU81E9D0X4PNmV4jvk5hK42Vay2oGNl",
+                "name": "Set Variables",
+                "title": "Set Error Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Error Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01PAQU6ZBFLHY1nL2kdW3FMq2ToSHGdfyVR.output.variable_workflow_01PAQU6Z3TNKD4FI9G70CPzW0sAuFKmMVls$",
+                      "variable_value_new": "$activity.definition_activity_01PAQU796RAP630u4quzUfmkLzQmUH9k83J.output.error.message$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "table_types": {
+    "tabletype_01PCICRHIEYRK5pJ1aW71AbYt6pBm8Hlz7E": {
+      "unique_name": "tabletype_01PCICRHIEYRK5pJ1aW71AbYt6pBm8Hlz7E",
+      "data_type": "datatype.tabletype",
+      "display_name": "ThousandEyes Detailed Path Trace Table",
+      "columns": [
+        {
+          "name": "prefix",
+          "title": "Prefix",
+          "type": "string"
+        },
+        {
+          "name": "rdns",
+          "title": "RDNS",
+          "type": "string"
+        },
+        {
+          "name": "responseTime",
+          "title": "Response Time",
+          "type": "integer"
+        },
+        {
+          "name": "hop",
+          "title": "Hop",
+          "type": "integer"
+        },
+        {
+          "name": "ipAddress",
+          "title": "IP Address",
+          "type": "string"
+        },
+        {
+          "name": "location",
+          "title": "Location",
+          "type": "string"
+        },
+        {
+          "name": "mpls",
+          "title": "MPLS",
+          "type": "string"
+        },
+        {
+          "name": "network",
+          "title": "Network",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}
