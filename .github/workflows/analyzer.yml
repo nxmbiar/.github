@@ -70,8 +70,10 @@ jobs:
           url: "https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/ANALYZER_ISSUE_TEMPLATE.md"
           method: 'GET'
 
-      - name: Show Response
-        run: printf $${{ steps.analyzer-issue-template.outputs.response }} >> .github/templates/ANALYZER_ISSUE_TEMPLATE.md
+      - name: Write analyzer-issue-template
+        run: |
+          line=$(echo $${{ steps.analyzer-issue-template.outputs.response }} | sed -r 's/%/%%/g')
+          printf "$line" >> .github/templates/ANALYZER_ISSUE_TEMPLATE.md
       
       - name: setup python
         uses: actions/setup-python@v2
