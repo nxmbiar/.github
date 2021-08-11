@@ -39,33 +39,39 @@ jobs:
       #     CONFIGURATION: '{ "method": "GET" }'
       #     SAVE_LOCATION: $GITHUB_WORKSPACE/.github/analyzer_run.js
 
-      - name: Make Request
-        id: myRequest
+      - name: Get analyzer-run
+        id: analyzer-run
         uses: fjogeleit/http-request-action@master
         with:
           url: "https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/analyzer_run.js"
           method: 'GET'
 
-      - name: Show Response
-        run: echo ${{ steps.myRequest.outputs.response }}
+      - name: Write analyzer-run
+        run: echo ${{ steps.analyzer-run.outputs.response }} >> .github/analyzer_run.js
           
       - name: execute node script # run sj-gobierno.py to get the latest data
         run: node .github/analyzer_run.js $GITHUB_WORKSPACE
         id: analyzer-script
-      
-      - name: Fetch analyzer-render-template
-        uses: JamesIves/fetch-api-data-action@releases/v1
+
+      - name: Get analyzer-render-template
+        id: analyzer-render-template
+        uses: fjogeleit/http-request-action@master
         with:
-          ENDPOINT: https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/analyzer_render_template.py
-          CONFIGURATION: '{ "method": "GET" }'
-          SAVE_LOCATION: $GITHUB_WORKSPACE/.github/analyzer_render_template.js
+          url: "https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/analyzer_render_template.py"
+          method: 'GET'
+
+      - name: Write analyzer-render-template
+        run: echo ${{ steps.analyzer-render-template.outputs.response }} >> .github/analyzer_render_template.py
       
-      - name: Fetch analyzer-issue-template
-        uses: JamesIves/fetch-api-data-action@releases/v1
+      - name: Get analyzer-issue-template
+        id: analyzer-issue-template
+        uses: fjogeleit/http-request-action@master
         with:
-          ENDPOINT: https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/ANALYZER_ISSUE_TEMPLATE.md
-          CONFIGURATION: '{ "method": "GET" }'
-          SAVE_LOCATION: $GITHUB_WORKSPACE/.github/templates/ANALYZER_ISSUE_TEMPLATE.md
+          url: "https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/ANALYZER_ISSUE_TEMPLATE.md"
+          method: 'GET'
+
+      - name: Show Response
+        run: echo ${{ steps.analyzer-issue-template.outputs.response }} >> .github/templates/ANALYZER_ISSUE_TEMPLATE.md
       
       - name: setup python
         uses: actions/setup-python@v2
