@@ -73,7 +73,7 @@ jobs:
       - name: Write analyzer-issue-template
         run: |
           line=$(echo $${{ steps.analyzer-issue-template.outputs.response }} | sed -r 's/%/%%/g')
-          printf "$line" >> .github/templates/ANALYZER_ISSUE_TEMPLATE.md
+          printf -- "$line" >> .github/templates/ANALYZER_ISSUE_TEMPLATE.md
       
       - name: setup python
         uses: actions/setup-python@v2
