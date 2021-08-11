@@ -47,7 +47,7 @@ jobs:
           pip install jinja2
           
       - name: execute py script # run sj-gobierno.py to get the latest data
-        run: python .github/analyzer_render_template.py ${{ steps.analyzer-script.outputs.OUTPUT_JSON }}"
+        run: python .github/analyzer_render_template.py $GITHUB_WORKSPACE
       
       - name: Create Issue
         uses: JasonEtco/create-an-issue@v2

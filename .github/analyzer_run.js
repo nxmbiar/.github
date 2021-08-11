@@ -44,13 +44,19 @@ fetch('https://raw.githubusercontent.com/CiscoSecurity/sxo-05-security-workflows
               });
             //   console.log(output_json)
         }
-        else if(fs.statSync(file).isFile() && !file.includes('package-lock')){
-            var wf = fs.readFileSync(file, 'utf-8')
+        // else if(fs.statSync(file).isFile() && (file.includes('package-lock') || file.includes('.git') || file.includes('test.json'))){
+        //     var wf = fs.readFileSync(file, 'utf-8')
         
-            let analyzed = analyzeWorkflow(wf)
-            console.log(analyzed)
-        }
+        //     let analyzed = analyzeWorkflow(wf)
+        //     console.log(analyzed)
+        // }
       });
+
+      fs.writeFile(path.join(".github","test.json"), JSON.stringify(output_json), function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
 
       console.log(`::set-output name=OUTPUT_JSON::${JSON.stringify(output_json)}`)
   })
