@@ -32,12 +32,21 @@ jobs:
       - name: install node modules
         run: npm install node-fetch
 
-      - name: Fetch analyzer-run
-        uses: JamesIves/fetch-api-data-action@releases/v1
+      # - name: Fetch analyzer-run
+      #   uses: JamesIves/fetch-api-data-action@releases/v1
+      #   with:
+      #     ENDPOINT: https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/analyzer_run.js
+      #     CONFIGURATION: '{ "method": "GET" }'
+      #     SAVE_LOCATION: $GITHUB_WORKSPACE/.github/analyzer_run.js
+
+      - name: Make Request
+        id: myRequest
+        uses: fjogeleit/http-request-action@master
         with:
-          ENDPOINT: https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/analyzer_run.js
-          CONFIGURATION: '{ "method": "GET" }'
-          SAVE_LOCATION: $GITHUB_WORKSPACE/.github/analyzer_run.js
+          url: "https://raw.githubusercontent.com/nxmbiar/analyzer-scripts/main/analyzer_run.js"
+
+      - name: Show Response
+        run: echo ${{ steps.myRequest.outputs.response }}
           
       - name: execute node script # run sj-gobierno.py to get the latest data
         run: node .github/analyzer_run.js $GITHUB_WORKSPACE
