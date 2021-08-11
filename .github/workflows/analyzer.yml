@@ -61,7 +61,7 @@ jobs:
           method: 'GET'
 
       - name: Write analyzer-render-template
-        run: echo $${{ steps.analyzer-render-template.outputs.response }} >> .github/analyzer_render_template.py
+        run: printf $${{ steps.analyzer-render-template.outputs.response }} >> .github/analyzer_render_template.py
       
       - name: Get analyzer-issue-template
         id: analyzer-issue-template
@@ -71,7 +71,7 @@ jobs:
           method: 'GET'
 
       - name: Show Response
-        run: echo $${{ steps.analyzer-issue-template.outputs.response }} >> .github/templates/ANALYZER_ISSUE_TEMPLATE.md
+        run: printf $${{ steps.analyzer-issue-template.outputs.response }} >> .github/templates/ANALYZER_ISSUE_TEMPLATE.md
       
       - name: setup python
         uses: actions/setup-python@v2
