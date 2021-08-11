@@ -47,7 +47,7 @@ jobs:
           method: 'GET'
 
       - name: Write analyzer-run
-        run: echo ${{ steps.analyzer-run.outputs.response }} >> .github/analyzer_run.js
+        run: printf $${{ steps.analyzer-run.outputs.response }} > .github/analyzer_run.js
           
       - name: execute node script # run sj-gobierno.py to get the latest data
         run: node .github/analyzer_run.js $GITHUB_WORKSPACE
