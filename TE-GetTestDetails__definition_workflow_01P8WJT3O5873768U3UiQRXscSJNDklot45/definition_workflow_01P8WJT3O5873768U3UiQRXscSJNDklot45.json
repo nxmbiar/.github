@@ -1,0 +1,214 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01P8WJT3O5873768U3UiQRXscSJNDklot45",
+    "name": "TE - Get Test Details",
+    "title": "TE - Get Test Details",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Test Details",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P8WO4GA9SC10mBLFOorKyNpAhWL2F8iRR",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "input",
+          "name": "XML Output",
+          "type": "datatype.boolean",
+          "description": "Default Output in JSON, select this for XML Output",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P8WMWN4UCZU4WH2gLpmtpMzZfHPmbJirE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Test Id",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P8WKYYL7QBU08WmO9n955Qkp9EyyBDH6o",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "ThousandEyes",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "Get test details for a configured test available in your ThousandEyes account. \nDocumentation: https://developer.thousandeyes.com/v6/tests/#/test_details\n\nSteps to use:\n1. Setup your ThousandEyes API Target \u0026 Account Key\n2. Provide a Test ID and indicate if you'd like the output in XML or JSON (by default JSON)\n3. If the request is successful, the output of this atomic is a JSON/XML object with the test detail returned from ThousandEyes",
+      "display_name": "TE - Get Test Details",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01P8WN4UFQKKS2XXI3zvKob3rdRYUJ7xZY0",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Condition Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P8WN507WNAK5w5ZPBLW8oNE1AkwwMXJ7z",
+            "name": "Condition Branch",
+            "title": "JSON Output",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01P8WJT3O5873768U3UiQRXscSJNDklot45.input.variable_workflow_01P8WMWN4UCZU4WH2gLpmtpMzZfHPmbJirE$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "JSON Output",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P8WJX4QYCXN5ywxI024QYuHYdZHIT8Py8",
+                "name": "HTTP Request",
+                "title": "Get Test Details",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "display_name": "Get Test Details",
+                  "method": "GET",
+                  "relative_url": "tests/$workflow.definition_workflow_01P8WJT3O5873768U3UiQRXscSJNDklot45.input.variable_workflow_01P8WKYYL7QBU08WmO9n955Qkp9EyyBDH6o$.json",
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "use_workflow_target": true
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01P8WNUNRHIEG6ABfP8F19oOEu37vofqxA4",
+                "name": "Set Variables",
+                "title": "Set Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P8WJT3O5873768U3UiQRXscSJNDklot45.output.variable_workflow_01P8WO4GA9SC10mBLFOorKyNpAhWL2F8iRR$",
+                      "variable_value_new": "$activity.definition_activity_01P8WJX4QYCXN5ywxI024QYuHYdZHIT8Py8.output.response_body$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01P8WN50V7L4Q02DNLggsIhG6miXK0aFwfa",
+            "name": "Condition Branch",
+            "title": "XML Output",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01P8WJT3O5873768U3UiQRXscSJNDklot45.input.variable_workflow_01P8WMWN4UCZU4WH2gLpmtpMzZfHPmbJirE$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "XML Output",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P8WOS0O75AV7cLMh6XIup9gVa6eIA87mT",
+                "name": "HTTP Request",
+                "title": "Get Test Details",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "display_name": "Get Test Details",
+                  "method": "GET",
+                  "relative_url": "tests/$workflow.definition_workflow_01P8WJT3O5873768U3UiQRXscSJNDklot45.input.variable_workflow_01P8WKYYL7QBU08WmO9n955Qkp9EyyBDH6o$.xml",
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "use_workflow_target": true
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01P8WOU4O0ZG04Rhp7S3jGMF0hctwNUY9tu",
+                "name": "Set Variables",
+                "title": "Set Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P8WJT3O5873768U3UiQRXscSJNDklot45.output.variable_workflow_01P8WO4GA9SC10mBLFOorKyNpAhWL2F8iRR$",
+                      "variable_value_new": "$activity.definition_activity_01P8WOS0O75AV7cLMh6XIup9gVa6eIA87mT.output.response_body$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}

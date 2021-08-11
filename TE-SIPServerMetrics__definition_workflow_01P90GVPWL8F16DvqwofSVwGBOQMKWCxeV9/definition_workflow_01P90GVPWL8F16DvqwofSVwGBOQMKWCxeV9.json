@@ -1,0 +1,350 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9",
+    "name": "TE - SIP Server Metrics",
+    "title": "TE - SIP Server Metrics",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "From Date",
+          "type": "datatype.string",
+          "description": "Format: YYYY-mm-ddTHH:MM:SS",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P90NLW0KFK43BCtcIgatIszRfu7A1ItgQ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Filter Criteria",
+          "type": "datatype.string",
+          "description": "Filter by field values, for example: errorType == \"Connect\" will return only agent-to-server tests. Logical AND/OR operators are also supported. By default or if you leave this field blank, all rows are returned.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P90GVPOYV1K2v0XQ548y6qjkXY392INUD",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Test Id",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P90HTT9GPDH6FE7XaWt31bSTPAOiSyowf",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P90GVPOYWAD7QsLclrMzc8WomR2oTFRxg",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "From Date - To Date",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P90O1CHEC4O0F48I2mEHV0ve7psav7tZe",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "'agentId','agentName','authUser','serverIp','countryId','date','roundId','permalink','availability','connectTime','dnsTime','inviteTime','numRedirects','optionsRequest','optionsResponse','registerTime','responseCode','responseTime','totalTime','waitTime','errorType','problemDetail'",
+          "scope": "input",
+          "name": "Fields To Return",
+          "type": "datatype.string",
+          "description": "Single quoted, comma-separated list of fields to return. By default, the following are available \u0026 supported, i.e. you may choose to output one or more of these: \n\n'testId', 'testName', 'createdDate', 'modifiedDate', 'createdBy', 'modifiedBy', 'enabled', 'savedEvent', 'type', 'interval', 'server', 'protocol', 'ipv6policy', 'networkMeasurements', 'mtuMeasurements', 'bandwidthMeasurements', 'bgpMeasurements', 'usePublicBgp', 'dscpId', 'alertsEnabled', 'liveShare', 'pingPayloadSize', 'probeMode', 'pathTraceMode', 'numPathTraces', 'dscp'",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P90GVPOYQC61VBb5ZsR4qmEM5nfYkiaGd",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "To Date",
+          "type": "datatype.string",
+          "description": "Format: YYYY-mm-ddTHH:MM:SS",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P90NPXH4KYT3VQkWMRN82ajPYOY1No60j",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "ThousandEyes",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "Returns voice SIP server metrics (response, invite, register time) from each agent, for each roundId in the requested window. A time frame must be specified, or the current round of data will be returned.\nDocumentation: https://developer.thousandeyes.com/v6/test_data/#/voice-sip-server\n\nSteps to use:\n1. Setup your ThousandEyes API Target \u0026 Account Key\n2. Provide a TestID, From \u0026 To Date in the format YYYY-MM-DDTHH:MM:SS, filter criteria/condition \u0026 what fields you'd like to have returned (this step is optional - by default, all fields/values are returned)\n3. If the request is successful, the output of this atomic is a JSON string w/ rows that match the filter criteria\n4. If the request is not successful, the output contains the error message",
+      "display_name": "TE - SIP Server Metrics",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01P90NSZNZGY14uTFiz6Kt6rsf0dfwTmqbt",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Condition Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P90NT5J1EZ2410oltv5r71yx5MbQuK5cs",
+            "name": "Condition Branch",
+            "title": "If From and To Dates Are Present",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.input.variable_workflow_01P90NLW0KFK43BCtcIgatIszRfu7A1ItgQ$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.input.variable_workflow_01P90NPXH4KYT3VQkWMRN82ajPYOY1No60j$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "If From and To Dates Are Present",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P90P6RQXWTM64zHWRnzAQUlgVkQL3kulv",
+                "name": "Set Variables",
+                "title": "Set From Date - To Date",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set From Date - To Date",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.local.variable_workflow_01P90O1CHEC4O0F48I2mEHV0ve7psav7tZe$",
+                      "variable_value_new": "?from=$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.input.variable_workflow_01P90NLW0KFK43BCtcIgatIszRfu7A1ItgQ$\u0026to=$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.input.variable_workflow_01P90NPXH4KYT3VQkWMRN82ajPYOY1No60j$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01P90GVZPZWDH2lA0h5DbuUk3MRvUwkxeEO",
+        "name": "Swagger HTTP Request",
+        "title": "Get SIP Server Test Metrics",
+        "type": "web-service.swagger_http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Get SIP Server Test Metrics",
+          "error": "null",
+          "method": "GET",
+          "relative_url": "/voice/sip-server/$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.input.variable_workflow_01P90HTT9GPDH6FE7XaWt31bSTPAOiSyowf$.json$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.local.variable_workflow_01P90O1CHEC4O0F48I2mEHV0ve7psav7tZe$",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "swagger_url": "https://raw.githubusercontent.com/ciscomanagedservices/sxo-thousandeyes/main/Cisco%20ThousandEyes%20API%20v6.json?token=AHLRMJZ5W5AIJTU2SXZQEEDAZNQAU",
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01P90GW3VZ3YC6LKNymRE89HVVeTFxjMoJg",
+        "name": "Condition Block",
+        "title": "Check if Successful",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Check if Successful",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P90GW87KNLY0B9GOal8tjBqT9zv2tpTOn",
+            "name": "Condition Branch",
+            "title": "Succeeded",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01P90GVZPZWDH2lA0h5DbuUk3MRvUwkxeEO.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Succeeded",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P90GWANL0832l8BkPmm1diSDvEIycHaRg",
+                "name": "Read Table from JSON",
+                "title": "Parse JSON into Table",
+                "type": "corejava.read_table_from_json",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Parse JSON into Table",
+                  "input_json": "$activity.definition_activity_01P90GVZPZWDH2lA0h5DbuUk3MRvUwkxeEO.output.response_body$",
+                  "jsonpath_query": "$.voice.sipMetrics[*][$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.input.variable_workflow_01P90GVPOYQC61VBb5ZsR4qmEM5nfYkiaGd$]",
+                  "persist_output": true,
+                  "populate_columns": true,
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01P90GWFJL1UU2qsL3Nq7YVGpMTjn5ZJGf7",
+                "name": "Select from Table",
+                "title": "Filter Table",
+                "type": "core.selectfromtable",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Filter Table",
+                  "input_table": "$activity.definition_activity_01P90GWANL0832l8BkPmm1diSDvEIycHaRg.output.read_table_from_json$",
+                  "number_of_rows": {
+                    "all_rows": true
+                  },
+                  "persist_output": true,
+                  "skip_execution": false,
+                  "sorting": {
+                    "no_sort": true
+                  },
+                  "where_clause": "$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.input.variable_workflow_01P90GVPOYV1K2v0XQ548y6qjkXY392INUD$"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01P90GWKMMILG2n1oeheq5bekDGiBti2eLj",
+                "name": "Set Variables",
+                "title": "Return Filtered JSON Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Return Filtered JSON Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.output.variable_workflow_01P90GVPOYWAD7QsLclrMzc8WomR2oTFRxg$",
+                      "variable_value_new": "$activity.definition_activity_01P90GWFJL1UU2qsL3Nq7YVGpMTjn5ZJGf7.output.response_body$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01P90GWPYXRQH1iO8PtcU9w117Z8hqVDCOJ",
+            "name": "Condition Branch",
+            "title": "Not Succeeded",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01P90GVZPZWDH2lA0h5DbuUk3MRvUwkxeEO.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Not Succeeded",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P90GWSH4DTJ4oB7qSgZt5td54MOjoRPB2",
+                "name": "Set Variables",
+                "title": "Set Error Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Error Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P90GVPWL8F16DvqwofSVwGBOQMKWCxeV9.output.variable_workflow_01P90GVPOYWAD7QsLclrMzc8WomR2oTFRxg$",
+                      "variable_value_new": "$activity.definition_activity_01P90GVZPZWDH2lA0h5DbuUk3MRvUwkxeEO.output.error.message$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}

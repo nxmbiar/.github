@@ -1,0 +1,520 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf",
+    "name": "TE - Network Path Visualisation",
+    "title": "TE - Network Path Visualisation",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P9TL04ITQ6W4Z8DMWnJiQLm4lLVjMS1ZN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01PCEI524H2741lVA6RHM8pMAEydQ8cjAMK",
+        "properties": {
+          "scope": "output",
+          "name": "Output Variables",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01PCEIG8UUDXP60WUHNAu292aLgl1i8Kazu",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "From Date",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P9TL04ITNVN0LJSX5zKzM83nb0h6hgn1t",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "'agentId','agentName','authUser','serverIp','countryId','date','roundId','permalink','availability','connectTime','dnsTime','inviteTime','numRedirects','optionsRequest','optionsResponse','registerTime','responseCode','responseTime','totalTime','waitTime','errorType','problemDetail'",
+          "scope": "input",
+          "name": "Fields To Return",
+          "type": "datatype.string",
+          "description": "Single quoted, comma-separated list of fields to return. By default, the following are available \u0026 supported, i.e. you may choose to output one or more of these: \n\n'testId', 'testName', 'createdDate', 'modifiedDate', 'createdBy', 'modifiedBy', 'enabled', 'savedEvent', 'type', 'interval', 'server', 'protocol', 'ipv6policy', 'networkMeasurements', 'mtuMeasurements', 'bandwidthMeasurements', 'bgpMeasurements', 'usePublicBgp', 'dscpId', 'alertsEnabled', 'liveShare', 'pingPayloadSize', 'probeMode', 'pathTraceMode', 'numPathTraces', 'dscp'",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P9TL04ITH6O6sVMtn0WBsmzs7uHj9s2GO",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "To Date",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P9TL04ITL680mWhuun1e2PsY890eLkote",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Test Id",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P9TL04ITRK8213fHOJFVQ3iRYxpFzHBEi",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "From Date - To Date",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P9TL04ITP0T2Wz26iOvQKQGaWV6hxL5p7",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "ThousandEyes",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "Returns a summary of the path visualization data collected from each agent to the destination. In each path visualization attempt, three attempts are made to reach the destination. Each set of data is summarized, based on response time, number of hops, and response time to the target. A time frame must be specified, or the current round of data will be returned.\n\nDocumentation: https://developer.thousandeyes.com/v6/test_data/#/path-vis\n\nSteps to use:\n1. Setup your ThousandEyes API Target \u0026 Account Key\n2. Provide a Test ID, a from \u0026 to date in the format YYYY-MM-DDTHH:MM:SS \u0026 what fields you'd like to have returned (if no filter criteria is specified, by default all fields/values are returned)\n3. If the request is successful, two output variables are made available: (a) a table object (b) a JSON string w/ the path visualisation output\n4. If the request is not successful, the output contains the error message",
+      "display_name": "TE - Network Path Visualisation",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01P9TL0FEV2XC2KGKEC8SD49SyeqrwkQuVi",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Condition Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P9TL0JEWB550joaGOSLHAQo053TSxlfhO",
+            "name": "Condition Branch",
+            "title": "If From and To Dates Are Present",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.input.variable_workflow_01P9TL04ITNVN0LJSX5zKzM83nb0h6hgn1t$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.input.variable_workflow_01P9TL04ITL680mWhuun1e2PsY890eLkote$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "If From and To Dates Are Present",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P9TL0LI0IUE5tsfxFwXchPUo6K18bNUNH",
+                "name": "Set Variables",
+                "title": "Set From Date - To Date",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set From Date - To Date",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.local.variable_workflow_01P9TL04ITP0T2Wz26iOvQKQGaWV6hxL5p7$",
+                      "variable_value_new": "?from=$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.input.variable_workflow_01P9TL04ITNVN0LJSX5zKzM83nb0h6hgn1t$\u0026to=$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.input.variable_workflow_01P9TL04ITL680mWhuun1e2PsY890eLkote$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01P9TL0PZP3IJ6zeDaQmPhA2iV1tgaiW7j1",
+        "name": "Swagger HTTP Request",
+        "title": "Get Network Test Path Visualisation",
+        "type": "web-service.swagger_http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Get Network Test Path Visualisation",
+          "error": "null",
+          "method": "GET",
+          "relative_url": "net/path-vis/$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.input.variable_workflow_01P9TL04ITRK8213fHOJFVQ3iRYxpFzHBEi$.json$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.local.variable_workflow_01P9TL04ITP0T2Wz26iOvQKQGaWV6hxL5p7$",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "swagger_url": "https://raw.githubusercontent.com/ciscomanagedservices/sxo-thousandeyes/main/Cisco%20ThousandEyes%20API%20v6.json?token=AHLRMJZ5W5AIJTU2SXZQEEDAZNQAU",
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01P9TL0UGOBJH1aFLj2Ytuwm55xdtowQ0Em",
+        "name": "Condition Block",
+        "title": "Check if Successful",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Check if Successful",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P9TL0YUKM670dVP1Tuqhe0UzVU7DZ5qx5",
+            "name": "Condition Branch",
+            "title": "Succeeded",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01P9TL0PZP3IJ6zeDaQmPhA2iV1tgaiW7j1.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Succeeded",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P9TM3DHRQ9D7S3o1xBxNFfgEQTsumY0Yp",
+                "name": "JSONPath Query",
+                "title": "Parse pathVis",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Parse pathVis",
+                  "input_json": "$activity.definition_activity_01P9TL0PZP3IJ6zeDaQmPhA2iV1tgaiW7j1.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$.net.pathVis",
+                      "jsonpath_query_name": "Path Visualisation",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01P9TXP8I9ZJV6YKjJRdSPBMk4mbBw0BwEC",
+                "name": "Execute Python Script",
+                "title": "Flatten JSON",
+                "type": "python3.script",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Flatten JSON",
+                  "script": "import json\nd = json.loads('$activity.definition_activity_01P9TM3DHRQ9D7S3o1xBxNFfgEQTsumY0Yp.output.jsonpath_queries.Path Visualisation$')\nnew_d = []\nfor paths in d:\n    for items in paths[\"endpoints\"]:\n        new_d.append({**items,\"roundId\":paths[\"roundId\"]})",
+                  "script_arguments": [
+                    ""
+                  ],
+                  "script_queries": [
+                    {
+                      "script_query": "new_d",
+                      "script_query_name": "Flattened Dictionary",
+                      "script_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01PC70PQZJOVR7LpNkI5BwBjNMT9eGhmlgY",
+                "name": "Replace String",
+                "title": "Replace Quotes for Read Table Activity",
+                "type": "core.replacestring",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Replace Quotes for Read Table Activity",
+                  "input_string": "$activity.definition_activity_01P9TXP8I9ZJV6YKjJRdSPBMk4mbBw0BwEC.output.script_queries.Flattened Dictionary$",
+                  "replace_list": [
+                    {
+                      "replaced_string": "'",
+                      "replacement_string": "\""
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01PC6RKREF3R21o9Q2JwxZ6D3KHB1HawWCF",
+                "name": "Read Table from JSON",
+                "title": "Read pathVis into Table",
+                "type": "corejava.read_table_from_json",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Read pathVis into Table",
+                  "input_json": "$activity.definition_activity_01PC70PQZJOVR7LpNkI5BwBjNMT9eGhmlgY.output.result_string$",
+                  "jsonpath_query": "$",
+                  "persist_output": true,
+                  "populate_columns": false,
+                  "skip_execution": false,
+                  "table_columns": [
+                    {
+                      "column_name": "numberOfHops",
+                      "column_type": "integer"
+                    },
+                    {
+                      "column_name": "pathMtu",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "ipAddress",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "responseTime",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "pathId",
+                      "column_type": "string"
+                    },
+                    {
+                      "column_name": "roundId",
+                      "column_type": "integer"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01PCENOBX4XR77JV0UTNMaZe6dVhVO6HGX3",
+                "name": "For Each",
+                "title": "For Each pathVis Attempt",
+                "type": "logic.for_each",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "For Each pathVis Attempt",
+                  "skip_execution": false,
+                  "source_array": "$activity.definition_activity_01PC6RKREF3R21o9Q2JwxZ6D3KHB1HawWCF.output.read_table_from_json$"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01PCEO105QXO72i9pUqnTmzSRwRTa2KMfBU",
+                    "name": "Add Row to Table",
+                    "title": "Add pathVis Output to Table",
+                    "type": "core.addrowtotable",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Add pathVis Output to Table",
+                      "input_table": "$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.output.variable_workflow_01PCEIG8UUDXP60WUHNAu292aLgl1i8Kazu$",
+                      "row": [
+                        {
+                          "key": "numberOfHops",
+                          "type": "integer",
+                          "value": "$activity.definition_activity_01PCENOBX4XR77JV0UTNMaZe6dVhVO6HGX3.input.source_array[@].numberOfHops$"
+                        },
+                        {
+                          "key": "pathMtu",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCENOBX4XR77JV0UTNMaZe6dVhVO6HGX3.input.source_array[@].pathMtu$"
+                        },
+                        {
+                          "key": "ipAddress",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCENOBX4XR77JV0UTNMaZe6dVhVO6HGX3.input.source_array[@].ipAddress$"
+                        },
+                        {
+                          "key": "responseTime",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCENOBX4XR77JV0UTNMaZe6dVhVO6HGX3.input.source_array[@].responseTime$"
+                        },
+                        {
+                          "key": "pathId",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01PCENOBX4XR77JV0UTNMaZe6dVhVO6HGX3.input.source_array[@].pathId$"
+                        },
+                        {
+                          "key": "roundId",
+                          "type": "integer",
+                          "value": "$activity.definition_activity_01PCENOBX4XR77JV0UTNMaZe6dVhVO6HGX3.input.source_array[@].roundId$"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01P9TL1AU8OM47SC8RbUiV8pQ94v92PaTMB",
+                "name": "Set Variables",
+                "title": "Return Filtered Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Return Filtered Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.output.variable_workflow_01P9TL04ITQ6W4Z8DMWnJiQLm4lLVjMS1ZN$",
+                      "variable_value_new": "$activity.definition_activity_01PC70PQZJOVR7LpNkI5BwBjNMT9eGhmlgY.output.result_string$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01P9TL1FJAIYG4TOP79JJfw5OM1RQLV2wJj",
+            "name": "Condition Branch",
+            "title": "Not Succeeded",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01P9TL0PZP3IJ6zeDaQmPhA2iV1tgaiW7j1.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Not Succeeded",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P9TL1HUVESX7k6wRPbHvkDSzOEDKzidmK",
+                "name": "Set Variables",
+                "title": "Set Error Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Error Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf.output.variable_workflow_01P9TL04ITQ6W4Z8DMWnJiQLm4lLVjMS1ZN$",
+                      "variable_value_new": "$activity.definition_activity_01P9TL0PZP3IJ6zeDaQmPhA2iV1tgaiW7j1.output.error.message$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "table_types": {
+    "tabletype_01PCEI524H2741lVA6RHM8pMAEydQ8cjAMK": {
+      "unique_name": "tabletype_01PCEI524H2741lVA6RHM8pMAEydQ8cjAMK",
+      "data_type": "datatype.tabletype",
+      "display_name": "ThousandEyes Path Vis",
+      "columns": [
+        {
+          "name": "ipAddress",
+          "title": "IP Address",
+          "type": "string"
+        },
+        {
+          "name": "numberOfHops",
+          "title": "Number of Hops",
+          "type": "integer"
+        },
+        {
+          "name": "pathId",
+          "title": "Path Id",
+          "type": "string"
+        },
+        {
+          "name": "pathMtu",
+          "title": "Path MTU",
+          "type": "string"
+        },
+        {
+          "name": "responseTime",
+          "title": "Response Time",
+          "type": "string"
+        },
+        {
+          "name": "roundId",
+          "title": "Round Id",
+          "type": "integer"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}
