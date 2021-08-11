@@ -61,7 +61,7 @@ jobs:
           method: 'GET'
 
       - name: Write analyzer-render-template
-        run: echo ${{ steps.analyzer-render-template.outputs.response }} >> .github/analyzer_render_template.py
+        run: echo $"${{ steps.analyzer-render-template.outputs.response }}" >> .github/analyzer_render_template.py
       
       - name: Get analyzer-issue-template
         id: analyzer-issue-template
