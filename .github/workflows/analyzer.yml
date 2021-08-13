@@ -82,7 +82,7 @@ jobs:
           format: 'json'
     
       - name: Echo JSON output
-        run: printf '%s,' '${{ steps.files.outputs.added_modified }}'
+        run: printf '%s,' '${{ steps.files.outputs.added_modified }}' > .github/wf.json
       
       - name: setup python
         uses: actions/setup-python@v2
