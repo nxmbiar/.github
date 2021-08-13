@@ -81,7 +81,7 @@ jobs:
         with:
           format: 'json'
     
-      - name: Echo JSON output
+      - name: Write Changed Files
         run: printf '%s,' '${{ steps.files.outputs.added_modified }}' > .github/wf.json
       
       - name: setup python
@@ -95,7 +95,7 @@ jobs:
           pip install jinja2
           
       - name: execute py script # run sj-gobierno.py to get the latest data
-        run: python .github/analyzer_render_template.py $GITHUB_WORKSPACE
+        run: python .github/analyzer_render_template.py $GITHUB_WORKSPACE $GITHUB_SHA
       
       - name: Create Issue
         uses: JasonEtco/create-an-issue@v2
