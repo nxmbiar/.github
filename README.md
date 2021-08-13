@@ -14,7 +14,7 @@ Steps to use:
 
 #### 2. [TE - Network Path Visualisation](/TE-NetworkPathVisualisation__definition_workflow_01P9TL04P9X864dEp8yCSXvEcuzPdZSoMDf)
 
-Returns a summary of the path visualization data collected from each agent to the destination. In each path visualization attempt, three attempts are made to reach the destination. Each set of data is summarized, based on response time, number of hops, and response time to the target. A time frame must be specified, or the current round of data will be returned.
+Something to trigger a wf Returns a summary of the path visualization data collected from each agent to the destination. In each path visualization attempt, three attempts are made to reach the destination. Each set of data is summarized, based on response time, number of hops, and response time to the target. A time frame must be specified, or the current round of data will be returned.
 
 Documentation: https://developer.thousandeyes.com/v6/test_data/#/path-vis
 
@@ -81,7 +81,7 @@ Steps to use:
 
 #### 8. [TE - Endpoint Agent Network Path Visualisation](/TE-EndpointAgentNWPathVis__definition_workflow_01PARNVHLVALO7RQtBimWR4MgGHNpevqzcM)
 
-Returns a summary of the path visualization data collected from each endpoint agent to the destination. In each path visualization attempt, one attempt is made to reach the destination. Each set of data is summarized, based on response time, number of hops, and response time to the target. A time frame must be specified, or the most recent round within last 2 hours will be returned.
+Something to trigger a wf Returns a summary of the path visualization data collected from each endpoint agent to the destination. In each path visualization attempt, one attempt is made to reach the destination. Each set of data is summarized, based on response time, number of hops, and response time to the target. A time frame must be specified, or the most recent round within last 2 hours will be returned.
 
 Documentation: https://developer.thousandeyes.com/v6/endpoint_test_data/#/endpoint_path-vis
 
