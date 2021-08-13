@@ -75,6 +75,15 @@ jobs:
           line=$(echo $${{ steps.analyzer-issue-template.outputs.response }} | sed -r 's/%/%%/g')
           printf -- "$line" >> .github/templates/ANALYZER_ISSUE_TEMPLATE.md
       
+      - name: Fetch Changed Files
+        id: files
+        uses: jitterbit/get-changed-files@v1
+        with:
+          format: 'json'
+    
+      - name: Echo JSON output
+        run: printf '%s,' '${{ steps.files.outputs.added_modified }}'
+      
       - name: setup python
         uses: actions/setup-python@v2
         with:
