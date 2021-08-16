@@ -89,7 +89,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install jinja2
           
-      - name: Execute Python Packages
+      - name: Execute Python Script
+        id: run-python-script
         run: python .github/analyzer_render_template.py $GITHUB_WORKSPACE $GITHUB_SHA
       
       - name: Create Issue
@@ -107,3 +108,4 @@ jobs:
         with:
           issue-number: ${{ steps.create-issue.outputs.number }}
           comment: Auto-closing issue because no failures or warnings detected
+        if: ${{ steps.run-python-script.outputs.no_issues }} == True
