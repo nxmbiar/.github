@@ -93,7 +93,7 @@ jobs:
         id: run-python-script
         run: python .github/analyzer_render_template.py $GITHUB_WORKSPACE $GITHUB_SHA
       
-        - run: echo ${{ steps.run-python-script.outputs.no_issue }}, ${{ steps.run-python-script.outputs.close_issues }}
+      - run: echo ${{ steps.run-python-script.outputs.no_issue }}, ${{ steps.run-python-script.outputs.close_issues }}
       
       - name: Create Issue
         if: ${{ steps.run-python-script.outputs.no_issue == 'False' }}
