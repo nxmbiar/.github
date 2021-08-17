@@ -3,7 +3,7 @@
 
 #### 1. [TE - Create Agent-To-Server Instant Test](/TE-CreateNetworkInstantTest__definition_workflow_01PA0SYZA23QH2AuC1VUrkF6l1d5hKzSQkB)
 
-Some change to trigger this Creates and runs a new Network Agent-To-Server Instant test in ThousandEyes.
+Some change to trigger Creates and runs a new Network Agent-To-Server Instant test in ThousandEyes.
 Documentation: https://developer.thousandeyes.com/v6/instant/#/instant
 
 Steps to use:
@@ -70,7 +70,7 @@ Steps to use:
 
 #### 7. [TE - Endpoint Agent Get Detailed Path Trace](/TE-EndpointAgentGetDetailedPathTrace__definition_workflow_01PARZE1PAOTG2qTw6VsxrqwPju7Urxi0cB)
 
-There should be atleast one issue please Returns a hop-by-hop summary of the path trace data collected during path visualization. In each round, one path discovery attempt is made to reach the destination. The entire path is returned. A roundId must be specified.
+There should be atleast one issue Returns a hop-by-hop summary of the path trace data collected during path visualization. In each round, one path discovery attempt is made to reach the destination. The entire path is returned. A roundId must be specified.
 Documentation: https://developer.thousandeyes.com/v6/endpoint_test_data/#/endpoint_traceroute
 
 Steps to use:
